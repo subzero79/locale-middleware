@@ -14,3 +14,7 @@ export async function middleware(request: NextRequest) {
 		return nextPage;
 	}
 }
+
+export const config = {
+	matcher: ["/checkout", "/e-receipt/:path*", "/", "/category/:path", "/checkout", "/services/:path*"],
+};
