@@ -5,6 +5,8 @@ export async function middleware(request: NextRequest) {
 	console.log("middleware ~ request", request.nextUrl.pathname);
 	const nextPage = NextResponse.next();
 	const { hostname } = request.nextUrl;
+	if (hostname === "google.com") return NextResponse.rewrite(new URL("/_start/_world", request.nextUrl));
+
 	if (
 		request.nextUrl.pathname.startsWith("/_next") || // exclude Next.js internals
 		request.nextUrl.pathname.startsWith("/api") || //  exclude all API routes
@@ -13,6 +15,7 @@ export async function middleware(request: NextRequest) {
 	) {
 		return nextPage;
 	}
+	return nextPage;
 }
 
 export const config = {
